@@ -3,10 +3,20 @@
 
     const pageSize = 8;
 
+    const delayTime = 0.5;
+
     const o_standingsSubHeader = document.getElementById('standingsSubHeader');
     const o_standings = document.getElementById('standings');
 
     const r_tournamentData = nodecg.Replicant('tournamentData');
+
+    function fadeOut() {
+        TweenMax.to('#standings', delayTime, { opacity: 0 })
+    }
+
+    function fadeIn() {
+        TweenMax.to('#standings', delayTime, { opacity: 1 })
+    }
 
     function createStanding(player) {
         var rankDiv = document.createElement('div');
@@ -72,17 +82,24 @@
         return page;
     }
 
+    function updateStandingsDisplay() {
+        const newData = r_tournamentData.value;
+        while (o_standings.firstChild) {
+            o_standings.removeChild(o_standings.firstChild);
+        }
+
+        getPage(newData.data.players, newData.page).forEach(item => {
+            o_standings.appendChild(item);
+        });
+        fadeIn();
+    }
+
     r_tournamentData.on('change', newData => {
         if (newData !== null && newData !== undefined) {
             o_standingsSubHeader.innerHTML = "" + newData.data.players.length + " Players - " + newData.data.links[1].href;
 
-            while (o_standings.firstChild) {
-                o_standings.removeChild(o_standings.firstChild);
-            }
-
-            getPage(newData.data.players, newData.page).forEach(item => {
-                o_standings.appendChild(item);
-            });
+            fadeOut();
+            window.setTimeout(updateStandingsDisplay, 1000 * delayTime);
         }
     });
 })();

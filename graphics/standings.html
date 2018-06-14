@@ -122,7 +122,7 @@
 </head>
 <body>
     <div class="standings-container">
-        <div class="header">Current Standings</div>
+        <div id="standingsHeader" class="header">Current Standings</div>
         <div id="standingsSubHeader" class="subHeader"></div>
         <div class="column-titles">
             <div class="rank">Rank</div>
@@ -132,19 +132,11 @@
             <div class="sos">SoS</div>
         </div>
         <div id="standings">
-            <div class="standing">
-                <div class="rank">1</div>
-                <div class="player-name">Pacer Stringfellow</div>
-                <div class="identities">
-                    <div class="identity corp">Mti Mwekundu</div>
-                    <div class="identity runner">Adam</div></div>
-                <div class="prestige">24</div>
-                <div class="sos">3</div>
-            </div>
         </div>
 
     </div>
 
+    <script src="../node_modules/gsap/src/minified/TweenMax.min.js"></script>
     <script src="standings.js"></script>
 </body>
 </html>
