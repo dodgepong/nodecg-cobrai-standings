@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="../node_modules/bulma/css/bulma.min.css">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+</head>
+<body>
+    <form onsubmit="return false;">
+        <div class="field">
+            <label class="label">Tournament ID</label>
+            <div class="control">
+                <input id="tournamentId" type="text" class="input">
+            </div>
+        </div>
+        <div class="field">
+            <div class="control">
+                <button class="button" id="fetchTournament">Fetch JSON</button>
+            </div>
+        </div>
+    </form>
+
+    <script src="../node_modules/axios/dist/axios.min.js"></script>
+    <script src="cobra-setup.js"></script>
+</body>
+</html>

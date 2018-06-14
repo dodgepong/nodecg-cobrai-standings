@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <style>
+        body {
+            margin: 0px;
+            padding: 0px;
+            background: url('background.png');
+        }
+
+        .standings-container {
+            display: flex;
+            flex-direction: column;
+            width: 1700px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 100%;
+        }
+
+        .standings-container .header {
+            margin-top: 50px;
+            color: white;
+            text-align: center;
+            font-family: "Rounded Elegance";
+            font-size: 70px;
+            width: 100%;
+        }
+
+        .standings-container .column-titles {
+            margin-top: 40px;
+            color: white;
+            font-family: "Rounded Elegance";
+            font-size: 40px;
+            display: flex;
+            width: 100%;
+            text-align: left;
+            border-bottom: 2pt white solid;
+        }
+
+        .rank {
+            width: 10%;
+            padding: 0px 16px;
+        }
+
+        .player-name {
+            width: 35%;
+            padding: 0px 16px;
+        }
+
+        .identities {
+            width: 30%;
+            padding: 0px 16px;
+        }
+
+        .prestige {
+            width: 15%;
+            padding: 0px 16px;
+        }
+
+        .sos {
+            width: 10%;
+            padding: 0px 16px;
+        }
+
+        .standing {
+            margin-top: 20px;
+            font-family: "Rounded Elegance";
+            color: white;
+            font-size: 40px;
+            display: flex;
+            width: 100%;
+            text-align: left;
+            background-color: rgba(131, 131, 255, 0.25);
+            border-radius: 15px;
+        }
+
+        .standing .rank {
+            padding: 8px 16px;
+        }
+
+        .standing .player-name {
+            padding: 8px 16px;
+        }
+
+        .standing .identities {
+            display: flex;
+            flex-direction: column
+        }
+
+        .standing .prestige {
+            padding: 8px 16px;
+        }
+
+        .standing .sos {
+            padding: 8px 16px;
+        }
+
+        .identity {
+            font-size: 20px;
+            margin: 4px;
+        }
+
+        .corp::before {
+            content: "C: "
+        }
+
+        .runner::before {
+            content: "R: "
+        }
+    </style>
+</head>
+<body>
+    <div class="standings-container">
+        <div class="header">Current Standings - 24 players</div>
+        <div class="column-titles">
+            <div class="rank">Rank</div>
+            <div class="player-name">Name</div>
+            <div class="identities">Identities</div>
+            <div class="prestige">Prestige</div>
+            <div class="sos">SoS</div>
+        </div>
+        <div id="standings">
+            <div class="standing">
+                <div class="rank">1</div>
+                <div class="player-name">Pacer Stringfellow</div>
+                <div class="identities">
+                    <div class="identity corp">Mti Mwekundu</div>
+                    <div class="identity runner">Adam</div></div>
+                <div class="prestige">24</div>
+                <div class="sos">3</div>
+            </div>
+        </div>
+
+    </div>
+
+    <script src="standings.js"></script>
+</body>
+</html>

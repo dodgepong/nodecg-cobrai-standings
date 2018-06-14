@@ -1,0 +1,46 @@
+{
+  "name": "nodecg-cobrai-standings",
+  "version": "0.0.0",
+  "description": "NodeCG bundle to display tournament standings from Cobr.ai",
+  "homepage": "",
+  "author": {
+    "name": "Ben Torell",
+    "email": "dodgepong@gmail.com",
+    "url": ""
+  },
+  "files": [
+    "dashboard",
+    "graphics",
+    "extension.js",
+    "extension"
+  ],
+  "keywords": [
+    "",
+    "nodecg-bundle"
+  ],
+  "nodecg": {
+    "compatibleRange": "~0.9.9",
+    "dashboardPanels": [
+      {
+        "name": "cobra-setup",
+        "title": "Cobr.ai Setup",
+        "width": 3,
+        "file": "cobra-setup.html",
+        "headerColor": "#9f9bbd"
+      }
+    ],
+    "graphics": [
+      {
+        "file": "standings.html",
+        "width": 1920,
+        "height": 1080
+      }
+    ]
+  },
+  "repository": "https://github.com/nodecg/nodecg.git",
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^0.18.0",
+    "bulma": "^0.7.1"
+  }
+}
