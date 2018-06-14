@@ -1,6 +1,9 @@
 (function () {
     'use strict';
 
+    const pageSize = 8;
+
+    const o_standingsSubHeader = document.getElementById('standingsSubHeader');
     const o_standings = document.getElementById('standings');
 
     const r_tournamentData = nodecg.Replicant('tournamentData');
@@ -25,7 +28,7 @@
         runnerDiv.innerHTML = player.runnerIdentity;
 
         var identitiesDiv = document.createElement('div');
-        identitiesDiv.classList.add('player-name');
+        identitiesDiv.classList.add('identities');
         identitiesDiv.appendChild(corpDiv);
         identitiesDiv.appendChild(runnerDiv);
 
@@ -35,7 +38,7 @@
 
         var sosDiv = document.createElement('div');
         sosDiv.classList.add('sos');
-        sosDiv.innerHTML = player.strengthOfSchedule;
+        sosDiv.innerHTML = Math.round(player.strengthOfSchedule * 1000) / 1000;
 
 
         var standingDiv = document.createElement('div');
@@ -49,14 +52,37 @@
         return standingDiv;
     }
 
+    function getPage(players, pageNumber) {
+        var page = [];
+
+        const startingIndex = ((pageNumber - 1) * pageSize);
+        const nextPageStartingIndex = pageNumber * pageSize;
+        if (startingIndex > players.length) {
+            // page doesn't exist
+            return [];
+        }
+
+        for (var i = startingIndex; i < nextPageStartingIndex; i++) {
+            if (typeof players[i] === 'undefined') {
+                break;
+            }
+            page.push(createStanding(players[i]));
+        }
+
+        return page;
+    }
+
     r_tournamentData.on('change', newData => {
         if (newData !== null && newData !== undefined) {
+            o_standingsSubHeader.innerHTML = "" + newData.data.players.length + " Players - " + newData.data.links[1].href;
+
             while (o_standings.firstChild) {
                 o_standings.removeChild(o_standings.firstChild);
             }
-            for (var i = 0; i < 8; i++) {
-                o_standings.appendChild(createStanding(newData.players[i]));
-            }
+
+            getPage(newData.data.players, newData.page).forEach(item => {
+                o_standings.appendChild(item);
+            });
         }
     });
 })();

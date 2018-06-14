@@ -27,6 +27,15 @@
             width: 100%;
         }
 
+        .standings-container .subHeader {
+            margin-top: 8px;
+            color: white;
+            text-align: center;
+            font-family: "Rounded Elegance";
+            font-size: 30px;
+            width: 100%;
+        }
+
         .standings-container .column-titles {
             margin-top: 40px;
             color: white;
@@ -64,7 +73,7 @@
         }
 
         .standing {
-            margin-top: 20px;
+            margin-top: 30px;
             font-family: "Rounded Elegance";
             color: white;
             font-size: 40px;
@@ -108,11 +117,13 @@
         .runner::before {
             content: "R: "
         }
+
     </style>
 </head>
 <body>
     <div class="standings-container">
-        <div class="header">Current Standings - 24 players</div>
+        <div class="header">Current Standings</div>
+        <div id="standingsSubHeader" class="subHeader"></div>
         <div class="column-titles">
             <div class="rank">Rank</div>
             <div class="player-name">Name</div>
