@@ -5,6 +5,7 @@
 
     const delayTime = 0.5;
 
+    const o_standingsHeader = document.getElementById('standingsHeader');
     const o_standingsSubHeader = document.getElementById('standingsSubHeader');
     const o_standings = document.getElementById('standings');
 
@@ -16,6 +17,41 @@
 
     function fadeIn() {
         TweenMax.to('#standings', delayTime, { opacity: 1 })
+    }
+
+    function removeSubtitle(name) {
+        var lastColonIndex = name.lastIndexOf(':');
+        if (lastColonIndex !== -1) {
+            var noSubtitle = name.substring(0, lastColonIndex);
+            if (noSubtitle !== 'NBN' && noSubtitle !== 'Haas-Bioroid' && noSubtitle !== 'Jinteki' && noSubtitle !== 'Weyland Consortium') {
+                return noSubtitle;
+            }
+        }
+        return name;
+    }
+
+    function findLatestCompletedRound(rounds) {
+        var latestRound = 0;
+
+        var finishedRounds = rounds.filter(round => {
+            if (round[0].eliminationGame) {
+                return false;
+            }
+
+            var unfinishedgames = round.filter(game => {
+                if (game.player1.combinedScore === null || game.player2.combinedScore === null) {
+                    return true;
+                }
+            });
+
+            if (unfinishedgames.length > 0) {
+                return false;
+            }
+
+            return true;
+        })
+
+        return finishedRounds.length;
     }
 
     function createStanding(player) {
@@ -30,12 +66,12 @@
         var corpDiv = document.createElement('div');
         corpDiv.classList.add('identity');
         corpDiv.classList.add('corp');
-        corpDiv.innerHTML = player.corpIdentity;
+        corpDiv.innerHTML = removeSubtitle(player.corpIdentity);
 
         var runnerDiv = document.createElement('div');
         runnerDiv.classList.add('identity');
         runnerDiv.classList.add('runner');
-        runnerDiv.innerHTML = player.runnerIdentity;
+        runnerDiv.innerHTML = removeSubtitle(player.runnerIdentity);
 
         var identitiesDiv = document.createElement('div');
         identitiesDiv.classList.add('identities');
@@ -96,6 +132,12 @@
 
     r_tournamentData.on('change', newData => {
         if (newData !== null && newData !== undefined) {
+            const currentRound = findLatestCompletedRound(newData.data.rounds);
+            if (currentRound === 0) {
+                o_standingsHeader.innerHTML = "Entries";
+            } else {
+                o_standingsHeader.innerHTML = "Current Standings as of Round " + currentRound;
+            }
             o_standingsSubHeader.innerHTML = "" + newData.data.players.length + " Players - " + newData.data.links[1].href;
 
             fadeOut();
